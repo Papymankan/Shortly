@@ -9,10 +9,25 @@
   --color-red: hsl(0, 87%, 67%);
   --color-grayishViolet: hsl(257, 7%, 63%);
   --color-veryDarkBlue: hsl(255, 11%, 22%);
-  --color-veryDarkViolet: hsl(260, 8%, 14%) F;
+  --color-veryDarkViolet: hsl(260, 8%, 14%);
 
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 976px;
   --breakpoint-xl: 1440px;
 }
+
+
+.cta-section {
+  background-image: url("/bg-boost-desktop.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 976px) {
+  .cta-section {
+    background-image: url("/bg-boost-mobile.svg");
+    background-position: center;
+  }
+}
+
