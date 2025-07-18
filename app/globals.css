@@ -3,6 +3,13 @@
 @theme {
   --color-darkGrayishBlue: hsl(210, 10%, 33%);
   --color-grayishBlue: hsl(201, 11%, 66%);
+  --color-cyan: hsl(180, 66%, 49%);
+  --color-cyanLight: hsl(180, 66%, 69%);
+  --color-darkViolet: hsl(257, 27%, 26%);
+  --color-red: hsl(0, 87%, 67%);
+  --color-grayishViolet: hsl(257, 7%, 63%);
+  --color-veryDarkBlue: hsl(255, 11%, 22%);
+  --color-veryDarkViolet: hsl(260, 8%, 14%) F;
 
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
