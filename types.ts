@@ -1,3 +1,6 @@
 export type inputLinkType = {
-  error: string;
+  shortenUrl: string | null;
+  success: boolean | null;
+   error?: string;
+   link?: string;
 };

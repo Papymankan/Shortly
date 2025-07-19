@@ -1,11 +1,22 @@
-"use client"
+"use client";
 
-import React, { useActionState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import ShortenLinks from "./shorten-links";
 import { inputLinkHandler } from "@/actions/inputLink";
 
 export default function InputLink() {
-  const [formState, formAction] = useActionState(inputLinkHandler, { error: "" });
+  const [formState, formAction] = useActionState(inputLinkHandler, {
+    shortenUrl: "",
+    success: null,
+    link: "",
+  });
+
+  const [input, setInput] = useState(formState.link || "");
+
+  useEffect(() => {
+    if (formState.link != undefined) setInput(formState.link);
+    if (formState.success) setInput("");
+  }, [formState.link, formState.success]);
 
   return (
     <>
@@ -18,6 +29,8 @@ export default function InputLink() {
             <input
               type="text"
               name="link"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="shorten a link here"
               className="w-full bg-white flex-1 rounded-xl px-4 py-3 text-lg placeholder:text-yellow-500 focus:outline-none"
             />
