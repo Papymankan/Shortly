@@ -2,8 +2,9 @@ import Header from "@/components/Header";
 import ShortenLinks from "@/components/shorten-links";
 import heroImage from "@/public/illustration-working.svg";
 import Image from "next/image";
-import "./globals.css"
+import "./globals.css";
 import Footer from "@/components/Footer";
+import InputLink from "@/components/InputLink";
 
 export default function Home() {
   return (
@@ -38,33 +39,7 @@ export default function Home() {
       </div>
 
       {/* link input */}
-      <div className="relative mt-24 w-full space-y-4 bg-gray-100 px-4 py-8">
-        <div className="relative mx-auto -mt-24 flex max-w-4xl flex-col items-center justify-between space-x-5 rounded-xl bg-veryDarkBlue p-8 md:flex-row">
-          <input
-            type="text"
-            placeholder="shorten a link here"
-            // value={inputValue}
-            // onChange={(e) => setInputValue(e.target.value)}
-            className="w-full bg-white flex-1 rounded-xl px-4 py-3 text-lg placeholder:text-yellow-500 focus:outline-none"
-          />
-          <button
-            className="mt-5 rounded-xl bg-cyan px-6 py-3 text-lg text-white md:mt-0"
-            // onClick={submitHandler}
-          >
-            Shorten it !
-          </button>
-
-          <p className="absolute bottom-2 left-7 text-sm italic text-red">
-            {/* {error} */}
-          </p>
-        </div>
-
-        {/* shorten Links */}
-        <ShortenLinks
-          origUrl="https://frontendmentor.io"
-          shortUrl="https://rel.ink/k4IKyk"
-        />
-      </div>
+      <InputLink />
 
       {/* Advanced Statistics */}
       <div className="w-full bg-gray-100 pb-40 font-poppins">
@@ -162,7 +137,7 @@ export default function Home() {
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
