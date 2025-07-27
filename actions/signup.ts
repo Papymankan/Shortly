@@ -1,5 +1,6 @@
 "use server";
 
+import { createSessionCookie } from "@/lib/auth";
 import { hashPassword } from "@/lib/hash";
 import { createUser, getUserByEmail } from "@/lib/users";
 import { SignUpState } from "@/types";
@@ -35,8 +36,20 @@ export async function signUpHandler(
     return { success: false, errors, values: { email, username, password } };
   }
 
-  const hashedPassword = hashPassword(password);
-  createUser(email, username, hashedPassword, "");
+  try {
+    const hashedPassword = hashPassword(password);
+    console.log(hashPassword);
+    const id = createUser(email, username, hashedPassword, "");
+    console.log(id);
+    await createSessionCookie(id);
+  } catch (error) {
+    console.error("SIGNUP ERROR:", error);
+    return {
+      success: false,
+      errors: { email: "Something went wrong. Please try again." },
+      values: { email, username, password },
+    };
+  }
 
   return { success: true, errors: {} };
 }
