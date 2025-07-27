@@ -12,22 +12,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { signUpHandler } from "@/actions/signup";
 
 export default function ModalSignupPage() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const router = useRouter();
-
-  useEffect(() => {
-    setOpen(true);
-  }, []);
 
   const [state, formAction, isPending] = useActionState(signUpHandler, {
     success: false,
     errors: {},
     values: { email: "", username: "", password: "" },
   });
+
+  useEffect(() => {
+    if (state.success) {
+      setOpen(false);
+      router.push("/");
+    }
+  }, [state.success, router]);
 
   return (
     <Dialog

@@ -1,6 +1,9 @@
 "use server";
 
+import { hashPassword } from "@/lib/hash";
+import { createUser, getUserByEmail } from "@/lib/users";
 import { SignUpState } from "@/types";
+import { redirect } from "next/navigation";
 
 export async function signUpHandler(
   prevState: SignUpState,
@@ -24,9 +27,16 @@ export async function signUpHandler(
     errors.password = "Password must be at least 8 characters long";
   }
 
+  if (getUserByEmail(email)) {
+    errors.email = "Email already in use";
+  }
+
   if (Object.keys(errors).length > 0) {
     return { success: false, errors, values: { email, username, password } };
   }
+
+  const hashedPassword = hashPassword(password);
+  createUser(email, username, hashedPassword, "");
 
   return { success: true, errors: {} };
 }
