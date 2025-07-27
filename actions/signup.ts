@@ -6,12 +6,27 @@ export async function signUpHandler(
   prevState: SignUpState,
   formData: FormData
 ): Promise<SignUpState> {
-  await new Promise((res) => setTimeout(res, 2000));
-  const email = formData.get("email");
-  const username = formData.get("username");
-  const password = formData.get("password");
+  const email = formData.get("email")?.toString() ?? "";
+  const username = formData.get("username")?.toString() ?? "";
+  const password = formData.get("password")?.toString() ?? "";
 
-  console.log(email, password, username);
+  const errors: Record<string, string> = {};
 
-  return { success: false, errors: {} };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.email = "Invalid email address";
+  }
+
+  if (username.length < 5) {
+    errors.username = "Username must be at least 5 characters";
+  }
+
+  if (password.length < 8) {
+    errors.password = "Password must be at least 8 characters long";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return { success: false, errors, values: { email, username, password } };
+  }
+
+  return { success: true, errors: {} };
 }

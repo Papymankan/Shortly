@@ -26,6 +26,7 @@ export default function ModalSignupPage() {
   const [state, formAction, isPending] = useActionState(signUpHandler, {
     success: false,
     errors: {},
+    values: { email: "", username: "", password: "" },
   });
 
   return (
@@ -50,6 +51,7 @@ export default function ModalSignupPage() {
               id="email"
               placeholder="you@example.com"
               required
+              defaultValue={state.values?.email}
             />
             <div className="w-full ">
               <p className="text-xs text-red h-4">
@@ -65,6 +67,7 @@ export default function ModalSignupPage() {
               id="username"
               placeholder="your username"
               required
+              defaultValue={state.values?.username}
             />
             <div className="w-full ">
               <p className="text-xs text-red h-4">
@@ -82,6 +85,7 @@ export default function ModalSignupPage() {
               type="password"
               required
               className="my-0"
+              defaultValue={state.values?.password}
             />
             <div className="w-full ">
               <p className="text-xs text-red h-4">

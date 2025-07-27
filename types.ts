@@ -14,5 +14,6 @@ export type signUpInputType = {
 
 export type SignUpState = {
   success: boolean;
-  errors: { [key: string]: string }; // or a more specific type
+  errors: { [key: string]: string };
+  values?: { email: string; username: string; password: string };
 };
