@@ -1,5 +1,6 @@
 import React from "react";
 import HeaderMenu from "./Header-menu";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -26,16 +27,22 @@ export default function Header() {
       </div>
 
       <div className="hidden items-center space-x-5 lg:flex">
-        <button className="px-4 py-3 text-grayishViolet duration-200 hover:text-black">
+        <Link
+          href={"/login"}
+          className="px-4 py-3 text-grayishViolet duration-200 hover:text-black"
+        >
           Login
-        </button>
+        </Link>
 
-        <button className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70">
+        <Link
+          href={"/signup"}
+          className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
+        >
           Sign Up
-        </button>
+        </Link>
       </div>
 
-    <HeaderMenu/>
+      <HeaderMenu />
     </div>
   );
 }
