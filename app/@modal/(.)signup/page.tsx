@@ -13,8 +13,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { signUpHandler } from "@/actions/signup";
 
-export default function ModalLoginPage() {
+export default function ModalSignupPage() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -22,7 +23,10 @@ export default function ModalLoginPage() {
     setOpen(true);
   }, []);
 
-//   const [state, formAction, isPending] = useActionState();
+  const [state, formAction, isPending] = useActionState(signUpHandler, {
+    success: false,
+    errors: {},
+  });
 
   return (
     <Dialog
@@ -34,11 +38,11 @@ export default function ModalLoginPage() {
     >
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Login</DialogTitle>
-          <DialogDescription>Sign in to your account</DialogDescription>
+          <DialogTitle className="text-xl font-bold">Sign Up</DialogTitle>
+          <DialogDescription>Create your account</DialogDescription>
         </DialogHeader>
 
-        <form action={""}>
+        <form action={formAction}>
           <div className="grid gap-2 py-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -49,7 +53,22 @@ export default function ModalLoginPage() {
             />
             <div className="w-full ">
               <p className="text-xs text-red h-4">
-                {/* your password must contain at least 8 characters */}
+                {state?.errors && state.errors.email}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-2 py-2">
+            <Label htmlFor="username">UserName</Label>
+            <Input
+              name="username"
+              id="username"
+              placeholder="your username"
+              required
+            />
+            <div className="w-full ">
+              <p className="text-xs text-red h-4">
+                {state?.errors && state.errors.username}
               </p>
             </div>
           </div>
@@ -66,14 +85,18 @@ export default function ModalLoginPage() {
             />
             <div className="w-full ">
               <p className="text-xs text-red h-4">
-                {/* your password must contain at least 8 characters */}
+                {state?.errors && state.errors.password}
               </p>
             </div>
           </div>
 
           <DialogFooter className="mt-4">
-            <Button type="submit" className="bg-cyan text-white w-full">
-              Submit
+            <Button
+              type="submit"
+              className="bg-cyan text-white w-full"
+              disabled={isPending}
+            >
+              {isPending ? "Submitting..." : "Submit"}
             </Button>
           </DialogFooter>
         </form>
