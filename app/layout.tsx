@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { UserProvider } from "@/components/context/user-context";
 import { verifyAuth } from "@/lib/auth";
+import { getUserById } from "@/lib/users";
+import { user as userType } from "@/types";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +18,13 @@ export default async function RootLayout({
   modal: React.ReactNode;
 }>) {
   const { user } = await verifyAuth();
+  let userData: userType | null = null;
+  if (user) userData = getUserById(user.id) as userType;
 
   return (
     <html lang="en">
       <body>
-        <UserProvider user={user}>
+        <UserProvider user={userData}>
           {modal}
           {children}
         </UserProvider>

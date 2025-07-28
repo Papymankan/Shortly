@@ -1,13 +1,12 @@
 "use client";
 
-import { contextType } from "@/types";
-import { User } from "lucia";
+import { contextType, user } from "@/types";
 import { createContext, useContext } from "react";
 
 export const UserContext = createContext<contextType>({ user: null });
 
 type props = {
-  user: User | null;
+  user: user | null;
   children: React.ReactNode;
 };
 

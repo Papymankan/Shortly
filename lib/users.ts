@@ -1,3 +1,4 @@
+import { user } from "@/types";
 import db from "./db";
 
 export function createUser(

@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import HeaderMenu from "./Header-menu";
 import Link from "next/link";
+import { useUser } from "./context/user-context";
 
 export default function Header() {
+  const { user } = useUser();
+
   return (
     <div className="relative flex w-full items-center justify-between px-12 py-10">
       <div className="flex items-center justify-between">
@@ -26,21 +31,25 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="hidden items-center space-x-5 lg:flex">
-        <Link
-          href={"/login"}
-          className="px-4 py-3 text-grayishViolet duration-200 hover:text-black"
-        >
-          Login
-        </Link>
+      {user ? (
+        <p>{user.username}</p>
+      ) : (
+        <div className="hidden items-center space-x-5 lg:flex">
+          <Link
+            href={"/login"}
+            className="px-4 py-3 text-grayishViolet duration-200 hover:text-black"
+          >
+            Login
+          </Link>
 
-        <Link
-          href={"/signup"}
-          className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
-        >
-          Sign Up
-        </Link>
-      </div>
+          <Link
+            href={"/signup"}
+            className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
 
       <HeaderMenu />
     </div>
