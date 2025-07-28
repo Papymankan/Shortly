@@ -1,3 +1,5 @@
+import { User } from "lucia";
+
 export type inputLinkType = {
   shortenUrl: string | null;
   success: boolean | null;
@@ -16,4 +18,8 @@ export type SignUpState = {
   success: boolean;
   errors: { [key: string]: string };
   values?: { email: string; username: string; password: string };
+};
+
+export type contextType = {
+  user: User | null;
 };

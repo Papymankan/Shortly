@@ -21,10 +21,8 @@ const lucia = new Lucia(adapter, {
 export async function createSessionCookie(userId: number | bigint) {
   try {
     const session = await lucia.createSession(userId.toString(), {});
-    console.log("Session:", session);
 
     const sessionCookie = lucia.createSessionCookie(session.id);
-    console.log("Session Cookie:", sessionCookie);
 
     (await cookies()).set(
       sessionCookie.name,
@@ -32,43 +30,42 @@ export async function createSessionCookie(userId: number | bigint) {
       sessionCookie.attributes
     );
   } catch (err) {
-    console.error("CREATE SESSION ERROR:", err); // 👈 show real error
-    throw err; // 👈 propagate it to the signup handler
+    throw err; 
   }
 }
 
-// export async function verifyAuth() {
-//   const sessionCookie = cookies().get(lucia.sessionCookieName);
+export async function verifyAuth() {
+  const sessionCookie = (await cookies()).get(lucia.sessionCookieName);
 
-//   if (!sessionCookie) return { user: null, session: null };
+  if (!sessionCookie) return { user: null, session: null };
 
-//   const sessionId = sessionCookie.value;
+  const sessionId = sessionCookie.value;
 
-//   if (!sessionId) return { user: null, session: null };
+  if (!sessionId) return { user: null, session: null };
 
-//   const result = await lucia.validateSession(sessionId);
+  const result = await lucia.validateSession(sessionId);
 
-//   try {
-//     if (result.session && result.session.fresh) {
-//       const sessionCookie = lucia.createSessionCookie(result.session.id);
-//       cookies().set(
-//         sessionCookie.name,
-//         sessionCookie.value,
-//         sessionCookie.attributes
-//       );
-//     }
-//     if (!result.session) {
-//       const sessionCookie = lucia.createBlankSessionCookie();
-//       cookies().set(
-//         sessionCookie.name,
-//         sessionCookie.value,
-//         sessionCookie.attributes
-//       );
-//     }
-//   } catch {}
+  try {
+    if (result.session && result.session.fresh) {
+      const sessionCookie = lucia.createSessionCookie(result.session.id);
+      (await cookies()).set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes
+      );
+    }
+    if (!result.session) {
+      const sessionCookie = lucia.createBlankSessionCookie();
+      (await cookies()).set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes
+      );
+    }
+  } catch {}
 
-//   return result;
-// }
+  return result;
+}
 
 // export async function destroySession() {
 //   const { session } = await verifyAuth();
