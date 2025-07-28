@@ -38,9 +38,7 @@ export async function signUpHandler(
 
   try {
     const hashedPassword = hashPassword(password);
-    console.log(hashPassword);
     const id = createUser(email, username, hashedPassword, "");
-    console.log(id);
     await createSessionCookie(id);
   } catch (error) {
     console.error("SIGNUP ERROR:", error);

@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { signUpHandler } from "@/actions/signup";
 
 export default function ModalSignupPage() {

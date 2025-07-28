@@ -5,6 +5,18 @@ export type inputLinkType = {
   link?: string;
 };
 
+export type user = {
+  id: number;
+  email: string;
+  username: string;
+  password: string;
+  profileImageUrl: string | null;
+};
+
+export type contextType = {
+  user: user | null;
+};
+
 export type signUpInputType = {
   email: string;
   username: string;
@@ -18,14 +30,13 @@ export type SignUpState = {
   values?: { email: string; username: string; password: string };
 };
 
-export type user = {
-  id: number;
+export type loginInputType = {
   email: string;
-  username: string;
   password: string;
-  profileImageUrl: string | null;
 };
 
-export type contextType = {
-  user: user | null;
+export type LoginState = {
+  success: boolean;
+  errors: { [key: string]: string };
+  values?: { email: string; password: string };
 };
