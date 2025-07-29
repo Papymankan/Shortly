@@ -6,10 +6,11 @@ import { inputLinkHandler } from "@/actions/inputLink";
 import { useUser } from "./context/user-context";
 import { toast } from "sonner";
 import NotLoginToast from "./NotLoginToast";
-import SuccessToast from "./SuccessToast";
+import SuccessToast from "./SuccessCreateLinkToast";
+import { getBaseUrl } from "@/actions/utils";
 
 export default function InputLink() {
-  const { user } = useUser();
+  const { user, links } = useUser();
 
   const [formState, formAction, isPending] = useActionState(
     inputLinkHandler.bind(null, user),
@@ -70,10 +71,15 @@ export default function InputLink() {
         </div>
 
         {/* shorten Links */}
-        <ShortenLinks
-          origUrl="https://frontendmentor.io"
-          shortUrl="https://rel.ink/k4IKyk"
-        />
+
+        {links &&
+          links.map((link) => (
+            <ShortenLinks
+              key={link.id}
+              origUrl={link.originalUrl}
+              shortUrl={`${getBaseUrl()}/s/${link.shortUrl}`}
+            />
+          ))}
       </div>
     </>
   );

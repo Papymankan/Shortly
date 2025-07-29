@@ -3,7 +3,7 @@ import "./globals.css";
 import { UserProvider } from "@/components/context/user-context";
 import { verifyAuth } from "@/lib/auth";
 import { getUserById } from "@/lib/users";
-import { user as userType } from "@/types";
+import { Link, user as userType } from "@/types";
 import { Toaster } from "@/components/ui/sonner";
 import { getLinksByUser } from "@/lib/links";
 
@@ -21,14 +21,15 @@ export default async function RootLayout({
 }>) {
   const { user } = await verifyAuth();
   let userData: userType | null = null;
-  if (user) console.log(getLinksByUser(user?.id));
-
   if (user) userData = getUserById(user.id) as userType;
+
+  let userLinks: Link[] | null = null;
+  if (user) userLinks = getLinksByUser(user?.id) as Link[];
 
   return (
     <html lang="en">
       <body>
-        <UserProvider user={userData}>
+        <UserProvider user={userData} links={userLinks}>
           {modal}
           {children}
         </UserProvider>

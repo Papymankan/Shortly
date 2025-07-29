@@ -1,18 +1,24 @@
 "use client";
 
-import { contextType, user } from "@/types";
+import { contextType, Link, user } from "@/types";
 import { createContext, useContext } from "react";
 
-export const UserContext = createContext<contextType>({ user: null });
+export const UserContext = createContext<contextType>({
+  user: null,
+  links: null,
+});
 
 type props = {
   user: user | null;
+  links: Link[] | null;
   children: React.ReactNode;
 };
 
-export function UserProvider({ user, children }: props) {
+export function UserProvider({ user, links, children }: props) {
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, links }}>
+      {children}
+    </UserContext.Provider>
   );
 }
 

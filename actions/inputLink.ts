@@ -4,6 +4,7 @@ import { createLink } from "@/lib/links";
 import { inputLinkType, user } from "@/types";
 import { customAlphabet } from "nanoid";
 import { revalidatePath } from "next/cache";
+import { getBaseUrl } from "./utils";
 
 export async function inputLinkHandler(
   user: user | null,
@@ -67,9 +68,7 @@ export async function inputLinkHandler(
     };
   }
 
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+  const baseUrl = getBaseUrl();
 
   const fullShortUrl = `${baseUrl}/s/${shortenUrl}`;
   revalidatePath("/", "layout");
