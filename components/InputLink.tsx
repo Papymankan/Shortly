@@ -73,13 +73,15 @@ export default function InputLink() {
         {/* shorten Links */}
 
         {links &&
-          links.map((link) => (
-            <ShortenLinks
-              key={link.id}
-              origUrl={link.originalUrl}
-              shortUrl={`${getBaseUrl()}/s/${link.shortUrl}`}
-            />
-          ))}
+          links
+            .slice(0, 3)
+            .map((link) => (
+              <ShortenLinks
+                key={link.id}
+                origUrl={link.originalUrl}
+                shortUrl={`${getBaseUrl()}/s/${link.shortUrl}`}
+              />
+            ))}
       </div>
     </>
   );

@@ -24,7 +24,7 @@ export default async function RootLayout({
   if (user) userData = getUserById(user.id) as userType;
 
   let userLinks: Link[] | null = null;
-  if (user) userLinks = getLinksByUser(user?.id) as Link[];
+  if (user) userLinks = getLinksByUser(user?.id).reverse() as Link[];
 
   return (
     <html lang="en">
@@ -34,10 +34,10 @@ export default async function RootLayout({
           {children}
         </UserProvider>
         <Toaster
-          theme="dark" // or remove theme to avoid applying their default styles
+          theme="dark"
           toastOptions={{
             classNames: {
-              toast: "bg-transparent shadow-none", // override toast container
+              toast: "bg-transparent shadow-none",
             },
           }}
         />
