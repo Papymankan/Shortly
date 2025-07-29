@@ -1,12 +1,22 @@
 "use server";
 
-import { inputLinkType } from "@/types";
+import { inputLinkType, user } from "@/types";
 
 export async function inputLinkHandler(
+  user: user | null,
   prevState: inputLinkType,
   formData: FormData
 ): Promise<inputLinkType> {
-  const link = formData.get("link");
+  const link = formData.get("link") as string;
+
+  if (!user) {
+    return {
+      shortenUrl: "",
+      success: false,
+      toastError: "To shorten a link You have to login !",
+      link,
+    };
+  }
 
   if (!link || typeof link !== "string") {
     return {
@@ -35,8 +45,6 @@ export async function inputLinkHandler(
       link,
     };
   }
-
-
 
   return {
     shortenUrl: "",

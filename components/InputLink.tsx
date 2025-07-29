@@ -3,20 +3,34 @@
 import React, { useActionState, useEffect, useState } from "react";
 import ShortenLinks from "./shorten-links";
 import { inputLinkHandler } from "@/actions/inputLink";
+import { useUser } from "./context/user-context";
+import { toast } from "sonner";
+import NotLoginToast from "./NotLoginToast";
 
 export default function InputLink() {
-  const [formState, formAction] = useActionState(inputLinkHandler, {
-    shortenUrl: "",
-    success: null,
-    link: "",
-  });
+  const { user } = useUser();
+
+  const [formState, formAction] = useActionState(
+    inputLinkHandler.bind(null, user),
+    {
+      shortenUrl: "",
+      success: null,
+      link: "",
+    }
+  );
 
   const [input, setInput] = useState(formState.link || "");
 
   useEffect(() => {
     if (formState.link != undefined) setInput(formState.link);
     if (formState.success) setInput("");
-  }, [formState.link, formState.success]);
+    if (formState.toastError)
+      toast.custom((t) => <NotLoginToast t={t} formState={formState} />, {
+        duration: 300000,
+        position: "top-right",
+        dismissible: true,  
+      });
+  }, [formState]);
 
   return (
     <>

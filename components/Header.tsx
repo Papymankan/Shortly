@@ -32,7 +32,12 @@ export default function Header() {
       </div>
 
       {user ? (
-        <p>{user.username}</p>
+        <Link
+          href={"/links"}
+          className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
+        >
+          Links
+        </Link>
       ) : (
         <div className="hidden items-center space-x-5 lg:flex">
           <Link

@@ -4,6 +4,7 @@ import { UserProvider } from "@/components/context/user-context";
 import { verifyAuth } from "@/lib/auth";
 import { getUserById } from "@/lib/users";
 import { user as userType } from "@/types";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,6 +29,14 @@ export default async function RootLayout({
           {modal}
           {children}
         </UserProvider>
+        <Toaster
+          theme="dark" // or remove theme to avoid applying their default styles
+          toastOptions={{
+            classNames: {
+              toast: "bg-transparent shadow-none", // override toast container
+            },
+          }}
+        />
       </body>
     </html>
   );
