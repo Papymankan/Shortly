@@ -12,9 +12,9 @@ export default function NotLoginToast({
   formState: inputLinkType;
 }) {
   return (
-    <div className="bg-cyan text-white flex w-96 items-center justify-between gap-3 rounded-md  bg-red-50 p-4 shadow">
+    <div className="bg-cyan text-white flex sm:w-96 w-full items-center justify-between sm:gap-3 gap-2 rounded-md sm:p-4 p-3 shadow">
       <div>
-        <p className="text-sm font-medium text-red-800">
+        <p className="sm:text-sm text-xs font-medium text-red-800">
           ❌ {formState.toastError}
         </p>
       </div>
@@ -24,7 +24,7 @@ export default function NotLoginToast({
           toast.dismiss(t);
         }}
         href={"/login"}
-        className="rounded bg-red-600 px-4 py-2 text-xs text-cyan bg-white hover:bg-red-700"
+        className="rounded bg-red-600 sm:px-4 px-3 py-2 text-xs sm:text-xs text-cyan bg-white hover:bg-red-700"
       >
         Login
       </Link>
