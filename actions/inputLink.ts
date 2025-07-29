@@ -1,6 +1,9 @@
 "use server";
 
+import { createLink } from "@/lib/links";
 import { inputLinkType, user } from "@/types";
+import { customAlphabet } from "nanoid";
+import { revalidatePath } from "next/cache";
 
 export async function inputLinkHandler(
   user: user | null,
@@ -46,8 +49,33 @@ export async function inputLinkHandler(
     };
   }
 
+  const generateShortCode = customAlphabet(
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    8
+  );
+
+  const shortenUrl = generateShortCode();
+
+  try {
+    createLink(user.id.toString(), link, shortenUrl);
+  } catch (error) {
+    return {
+      shortenUrl: "",
+      success: null,
+      error: "There was a problem, try again later !",
+      link,
+    };
+  }
+
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+
+  const fullShortUrl = `${baseUrl}/s/${shortenUrl}`;
+  revalidatePath("/", "layout");
+
   return {
-    shortenUrl: "",
+    shortenUrl: fullShortUrl,
     success: true,
     link,
   };

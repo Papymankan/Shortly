@@ -6,11 +6,12 @@ import { inputLinkHandler } from "@/actions/inputLink";
 import { useUser } from "./context/user-context";
 import { toast } from "sonner";
 import NotLoginToast from "./NotLoginToast";
+import SuccessToast from "./SuccessToast";
 
 export default function InputLink() {
   const { user } = useUser();
 
-  const [formState, formAction] = useActionState(
+  const [formState, formAction, isPending] = useActionState(
     inputLinkHandler.bind(null, user),
     {
       shortenUrl: "",
@@ -23,12 +24,19 @@ export default function InputLink() {
 
   useEffect(() => {
     if (formState.link != undefined) setInput(formState.link);
-    if (formState.success) setInput("");
+    if (formState.success) {
+      setInput("");
+      toast.custom((t) => <SuccessToast t={t} formState={formState} />, {
+        duration: 3000,
+        position: "top-right",
+        dismissible: true,
+      });
+    }
     if (formState.toastError)
       toast.custom((t) => <NotLoginToast t={t} formState={formState} />, {
-        duration: 300000,
+        duration: 3000,
         position: "top-right",
-        dismissible: true,  
+        dismissible: true,
       });
   }, [formState]);
 
@@ -51,8 +59,9 @@ export default function InputLink() {
             <button
               className="mt-5 rounded-xl bg-cyan px-6 py-3 text-lg text-white md:mt-0"
               type="submit"
+              disabled={isPending}
             >
-              Shorten it !
+              {isPending ? "Submitting..." : "Shorten it !"}
             </button>
           </form>
           <p className="absolute bottom-2 left-7 text-sm italic text-red">
