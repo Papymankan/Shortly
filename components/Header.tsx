@@ -34,7 +34,7 @@ export default function Header() {
       {user ? (
         <Link
           href={"/links"}
-          className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
+          className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70 hidden lg:inline-block"
         >
           Links
         </Link>
