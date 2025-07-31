@@ -11,7 +11,6 @@ export async function GET(
   if (!link) {
     return NextResponse.redirect(new URL("/404", req.url));
   }
-
   incrementLinkVisits(params.shortenCode);
-  return NextResponse.redirect(link.originalUrl);
+  return NextResponse.redirect(link.originalUrl , 307);
 }
