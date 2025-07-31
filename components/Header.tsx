@@ -1,12 +1,33 @@
 "use client";
 
-import React from "react";
+import React, { useActionState, useEffect } from "react";
 import HeaderMenu from "./Header-menu";
 import Link from "next/link";
 import { useUser } from "./context/user-context";
+import { Button } from "./ui/button";
+import { logoutHandler } from "@/actions/logout";
+import { toast } from "sonner";
+import SuccessCustomToast from "./SuccessCustomToast";
 
 export default function Header() {
   const { user } = useUser();
+
+  const [state, formAction, isPending] = useActionState(logoutHandler, {
+    success: false,
+  });
+
+  useEffect(() => {
+    if (state.success) {
+      toast.custom(
+        () => <SuccessCustomToast text="You logged out successfully !" />,
+        {
+          duration: 3000,
+          position: "top-right",
+          dismissible: true,
+        }
+      );
+    }
+  }, [state]);
 
   return (
     <div className="relative flex w-full items-center justify-between px-12 py-10">
@@ -34,12 +55,27 @@ export default function Header() {
       </div>
 
       {user ? (
-        <Link
-          href={"/links"}
-          className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70 hidden lg:inline-block"
-        >
-          Links
-        </Link>
+        <>
+          <div className="hidden items-center space-x-5 lg:flex">
+            <Link
+              href={"/links"}
+              className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70 hidden lg:inline-block"
+            >
+              Links
+            </Link>
+
+            <form action={formAction}>
+              <Button
+                className="rounded-full bg-red-500 px-8 py-6 text-white duration-200 hover:opacity-70"
+                variant={"destructive"}
+                type="submit"
+                disabled={isPending}
+              >
+                {isPending ? "logging out ..." : "Logout"}
+              </Button>
+            </form>
+          </div>
+        </>
       ) : (
         <div className="hidden items-center space-x-5 lg:flex">
           <Link

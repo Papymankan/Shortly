@@ -30,7 +30,7 @@ export async function createSessionCookie(userId: number | bigint) {
       sessionCookie.attributes
     );
   } catch (err) {
-    throw err; 
+    throw err;
   }
 }
 
@@ -67,17 +67,17 @@ export async function verifyAuth() {
   return result;
 }
 
-// export async function destroySession() {
-//   const { session } = await verifyAuth();
+export async function destroySession() {
+  const { session } = await verifyAuth();
 
-//   if (!session) return { error: "UnAuthorized" };
+  if (!session) return { error: "UnAuthorized" };
 
-//   await lucia.invalidateSession(session.id);
+  await lucia.invalidateSession(session.id);
 
-//   const sessionCookie = lucia.createBlankSessionCookie();
-//   cookies().set(
-//     sessionCookie.name,
-//     sessionCookie.value,
-//     sessionCookie.attributes
-//   );
-// }
+  const sessionCookie = lucia.createBlankSessionCookie();
+  (await cookies()).set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes
+  );
+}

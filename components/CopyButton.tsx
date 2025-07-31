@@ -3,7 +3,7 @@
 import React from "react";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
-import SuccessCopiedToast from "./SuccessCopiedToast";
+import SuccessCustomToast from "./SuccessCustomToast";
 
 export default function CopyButton({ shortenUrl }: { shortenUrl: string }) {
   return (
@@ -12,7 +12,7 @@ export default function CopyButton({ shortenUrl }: { shortenUrl: string }) {
       title="Copy to ClipBoard"
       onClick={() => {
         navigator.clipboard.writeText(shortenUrl);
-        toast.custom(() => <SuccessCopiedToast />, {
+        toast.custom(() => <SuccessCustomToast text="Your link was Copied successfully" />, {
           duration: 3000,
           position: "top-right",
           dismissible: true,

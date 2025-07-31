@@ -51,3 +51,8 @@ export type Link = {
   userId: number;
   createdAt: string;
 };
+
+export type LogoutState = {
+  success: boolean;
+  error?: string;
+};
