@@ -26,7 +26,10 @@ export default function ModalLoginPage() {
   });
 
   useEffect(() => {
+    console.log("mount");
+
     if (state.success) {
+      console.log("success");
       setOpen(false);
       router.push("/");
     }

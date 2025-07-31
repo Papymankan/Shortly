@@ -1,9 +1,5 @@
 import Header from "@/components/Header";
 import React from "react";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import SignupForm from "@/components/SignupForm";
 

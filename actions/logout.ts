@@ -9,7 +9,7 @@ export async function logoutHandler(
   FormData: FormData
 ): Promise<LogoutState> {
   try {
-    destroySession();
+    await destroySession();
     revalidatePath("/", "layout");
     return { success: true };
   } catch (error) {

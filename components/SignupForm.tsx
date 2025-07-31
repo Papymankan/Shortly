@@ -6,9 +6,13 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { signUpHandler } from "@/actions/signup";
+import { useUser } from "./context/user-context";
 
 export default function SignupForm() {
   const router = useRouter();
+  const { user } = useUser();
+
+  if (user) router.push("/");
 
   const [state, formAction, isPending] = useActionState(signUpHandler, {
     success: false,
