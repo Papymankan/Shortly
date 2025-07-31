@@ -14,10 +14,10 @@ export default function SuccessToast({
   return (
     <div className="bg-cyan text-white flex sm:w-96 w-full items-center justify-between sm:gap-3 gap-2 rounded-md sm:p-4 p-3 shadow">
       <div>
-        <p className="sm:text-sm text-xs font-medium text-red-800">
+        <p className="sm:text-sm text-xs font-medium text-red-600-800">
           ✅ Your link was created successfully
         </p>
-        <p className="sm:text-xs text-xs font-medium text-red-800">
+        <p className="sm:text-xs text-xs font-medium text-red-600-800">
           {formState.shortenUrl}
         </p>
       </div>
@@ -26,7 +26,7 @@ export default function SuccessToast({
           toast.dismiss(t);
         }}
         href={formState.shortenUrl!}
-        className="rounded bg-red-600 sm:px-4 px-3 py-2 text-xs sm:text-xs text-cyan bg-white hover:bg-red-700"
+        className="rounded sm:px-4 px-3 py-2 text-xs sm:text-xs text-cyan bg-white"
       >
         Visit
       </Link>

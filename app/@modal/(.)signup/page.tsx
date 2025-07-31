@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signUpHandler } from "@/actions/signup";
 
 export default function ModalSignupPage() {
@@ -57,7 +57,7 @@ export default function ModalSignupPage() {
               defaultValue={state.values?.email}
             />
             <div className="w-full ">
-              <p className="text-xs text-red h-4">
+              <p className="text-xs text-red-600 h-4">
                 {state?.errors && state.errors.email}
               </p>
             </div>
@@ -73,7 +73,7 @@ export default function ModalSignupPage() {
               defaultValue={state.values?.username}
             />
             <div className="w-full ">
-              <p className="text-xs text-red h-4">
+              <p className="text-xs text-red-600 h-4">
                 {state?.errors && state.errors.username}
               </p>
             </div>
@@ -91,7 +91,7 @@ export default function ModalSignupPage() {
               defaultValue={state.values?.password}
             />
             <div className="w-full ">
-              <p className="text-xs text-red h-4">
+              <p className="text-xs text-red-600 h-4">
                 {state?.errors && state.errors.password}
               </p>
             </div>

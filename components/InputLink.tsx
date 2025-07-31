@@ -65,7 +65,7 @@ export default function InputLink() {
               {isPending ? "Submitting..." : "Shorten it !"}
             </button>
           </form>
-          <p className="absolute bottom-2 left-7 text-sm italic text-red">
+          <p className="absolute bottom-2 left-7 text-sm italic text-red-600">
             {formState && formState.error}
           </p>
         </div>

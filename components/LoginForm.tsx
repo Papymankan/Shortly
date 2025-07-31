@@ -34,7 +34,7 @@ export default function LoginForm() {
           defaultValue={state.values?.email}
         />
         <div className="w-full ">
-          <p className="text-xs text-red h-4">
+          <p className="text-xs text-red-600 h-4">
             {state?.errors && state.errors.email}
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function LoginForm() {
           defaultValue={state.values?.password}
         />
         <div className="w-full ">
-          <p className="text-xs text-red h-4">
+          <p className="text-xs text-red-600 h-4">
             {state?.errors && state.errors.password}
           </p>
         </div>

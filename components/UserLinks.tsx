@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useUser } from "./context/user-context";
 import LinkBox from "./Link";
