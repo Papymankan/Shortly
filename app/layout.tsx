@@ -6,7 +6,6 @@ import { getUserById } from "@/lib/users";
 import { Link, user as userType } from "@/types";
 import { Toaster } from "@/components/ui/sonner";
 import { getLinksByUser } from "@/lib/links";
-import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",

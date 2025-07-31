@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import ShortenLinks from "@/components/shorten-links";
 import heroImage from "@/public/illustration-working.svg";
 import Image from "next/image";
 import "./globals.css";
@@ -18,7 +17,7 @@ export default function Home() {
             More than just shorter links
           </h1>
           <p className="mt-6 w-full text-center text-xl font-semibold text-grayishViolet lg:max-w-md lg:text-left lg:text-2xl">
-            Build your brand's recognition and get detailed insights on how your
+            Build your brand&apos;s recognition and get detailed insights on how your
             links are performing
           </p>
           <button className="mx-auto mt-10 rounded-full bg-cyan px-12 py-5 text-2xl font-extrabold text-white duration-200 hover:opacity-70 lg:mx-0">
@@ -70,7 +69,7 @@ export default function Home() {
             </h2>
             <p className="text-l mx-auto mt-6 max-w-md text-center font-semibold text-grayishViolet lg:self-start lg:text-left">
               {" "}
-              Boost your brand recognition with each click. Generic links don't
+              Boost your brand recognition with each click. Generic links don&apos;t
               mean a thing. Branded links help instil confidence in your
               content.
             </p>

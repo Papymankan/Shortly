@@ -4,13 +4,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { shortenCode: string } }
+  // context: { params: { shortenCode: string } }
+  // { params }: { params: { shortenCode: string } },
+  { params }: { params: Promise<{ shortenCode: string }> }
 ) {
-  const link = getLinkByShortUrl(params.shortenCode) as Link;
+  const { shortenCode } = await params;
+  const link = getLinkByShortUrl(shortenCode) as Link;
 
   if (!link) {
     return NextResponse.redirect(new URL("/404", req.url));
   }
-  incrementLinkVisits(params.shortenCode);
-  return NextResponse.redirect(link.originalUrl , 307);
+  incrementLinkVisits(shortenCode);
+  return NextResponse.redirect(link.originalUrl, 307);
 }
