@@ -8,9 +8,11 @@ import { Button } from "./ui/button";
 import { logoutHandler } from "@/actions/logout";
 import { toast } from "sonner";
 import SuccessCustomToast from "./SuccessCustomToast";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const { user } = useUser();
+  const pathname = usePathname();
 
   const [state, formAction, isPending] = useActionState(logoutHandler, {
     success: false,
@@ -78,19 +80,39 @@ export default function Header() {
         </>
       ) : (
         <div className="hidden items-center space-x-5 lg:flex">
-          <Link
-            href={"/login"}
-            className="px-4 py-3 text-grayishViolet duration-200 hover:text-black"
-          >
-            Login
-          </Link>
+          {pathname == "/login" || pathname == "/signup" ? (
+            <>
+              <a
+                href={"/login"}
+                className="px-4 py-3 text-grayishViolet duration-200 hover:text-black"
+              >
+                Login
+              </a>
 
-          <Link
-            href={"/signup"}
-            className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
-          >
-            Sign Up
-          </Link>
+              <a
+                href={"/signup"}
+                className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
+              >
+                Sign Up
+              </a>
+            </>
+          ) : (
+            <>
+              <Link
+                href={"/login"}
+                className="px-4 py-3 text-grayishViolet duration-200 hover:text-black"
+              >
+                Login
+              </Link>
+
+              <Link
+                href={"/signup"}
+                className="rounded-full bg-cyan px-8 py-3 text-white duration-200 hover:opacity-70"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       )}
 
